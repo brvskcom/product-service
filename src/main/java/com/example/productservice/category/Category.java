@@ -1,9 +1,13 @@
 package com.example.productservice.category;
 
+import com.example.productservice.product.Product;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
@@ -36,7 +40,20 @@ public class Category {
     )
     private String categoryName;
 
+    @OneToMany(
+            mappedBy = "category",
+            orphanRemoval = true,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            fetch = FetchType.LAZY
+    )
+    private List<Product> products = new ArrayList<>();
+
     public Category(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public Category(Long id, String categoryName) {
+        this.id = id;
         this.categoryName = categoryName;
     }
 }
