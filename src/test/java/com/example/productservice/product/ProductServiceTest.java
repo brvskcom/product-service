@@ -71,9 +71,7 @@ class ProductServiceTest {
 
         // When
         // Then
-        assertThrows(CategoryNotFoundException.class, () -> {
-            productService.createNewProduct(command);
-        });
+        assertThrows(CategoryNotFoundException.class, () -> productService.createNewProduct(command));
 
     }
 
@@ -102,9 +100,7 @@ class ProductServiceTest {
 
         // When
         // Then
-        assertThrows(ProductNotFoundException.class, () -> {
-            productService.deleteProduct(productId);
-        });
+        assertThrows(ProductNotFoundException.class, () -> productService.deleteProduct(productId));
     }
 
     @Test
@@ -246,9 +242,7 @@ class ProductServiceTest {
 
         // When
         // Then
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            productService.decreaseAmountOfProducts(productId, decreaseByAmount);
-        });
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> productService.decreaseAmountOfProducts(productId, decreaseByAmount));
         assertEquals("The amount of products cannot be negative.", exception.getMessage());
     }
 
@@ -261,9 +255,7 @@ class ProductServiceTest {
         when(productRepository.findById(productId)).thenReturn(Optional.empty());
 
         // When/Then
-        assertThrows(ProductNotFoundException.class, () -> {
-            productService.increaseAmountOfProducts(productId, increaseByAmount);
-        });
+        assertThrows(ProductNotFoundException.class, () -> productService.increaseAmountOfProducts(productId, increaseByAmount));
     }
 
 
@@ -271,10 +263,9 @@ class ProductServiceTest {
         return ProductDetailedDto
                 .builder()
                 .id(productId)
-                .amountOfProducts(50)
-                .price(BigDecimal.valueOf(100.0))
+                .unitsInStock(50)
+                .unitPrice(BigDecimal.valueOf(100.0))
                 .productName("Test Product")
-                .categoryName("Test Category")
                 .description("Test Description")
                 .build();
     }
@@ -283,8 +274,8 @@ class ProductServiceTest {
         return ProductSimpleDto
                 .builder()
                 .id(productId)
-                .amountOfProducts(50)
-                .price(BigDecimal.valueOf(100.0))
+                .unitsInStock(50)
+                .unitPrice(BigDecimal.valueOf(100.0))
                 .productName("Test Product")
                 .build();
     }
@@ -305,10 +296,10 @@ class ProductServiceTest {
         return ProductCreateCommand
                 .builder()
                 .productName("Test Product")
-                .price(BigDecimal.valueOf(100.0))
+                .unitPrice(BigDecimal.valueOf(100.0))
                 .categoryName("Test Category")
                 .description("Test Description")
-                .amountOfProducts(50)
+                .unitsInStock(50)
                 .build();
     }
 

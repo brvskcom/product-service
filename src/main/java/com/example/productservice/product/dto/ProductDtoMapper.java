@@ -10,9 +10,10 @@ public class ProductDtoMapper {
         return ProductSimpleDto
                 .builder()
                 .productName(product.getName())
-                .price(product.getPrice())
-                .amountOfProducts(product.getUnitsInStock())
+                .unitPrice(product.getPrice())
+                .unitsInStock(product.getUnitsInStock())
                 .id(product.getId())
+                .imageUrl(product.getImageUrl())
                 .build();
     }
 
@@ -21,10 +22,13 @@ public class ProductDtoMapper {
                 .builder()
                 .productName(product.getName())
                 .description(product.getDescription())
-                .categoryName(product.getCategory().getCategoryName())
-                .amountOfProducts(product.getUnitsInStock())
-                .price(product.getPrice())
+                .unitsInStock(product.getUnitsInStock())
+                .unitPrice(product.getPrice())
                 .id(product.getId())
+                .sku(product.getSku())
+                .imageUrl(product.getImageUrl())
+                .updatedAt(product.getUpdatedAt())
+                .createdAt(product.getCratedAt())
                 .build();
     }
 

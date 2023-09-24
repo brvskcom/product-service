@@ -44,11 +44,11 @@ public class ProductService {
         return productPage.map(productDtoMapper::toSimpleDto);
     }
 
-    public Page<ProductSimpleDto> getProductsByCategoryName(String categoryName, Pageable pageable) {
-        categoryRepository.findByCategoryName(categoryName)
-                .orElseThrow(() -> new CategoryNotFoundException(categoryName));
+    public Page<ProductSimpleDto> getProductsByCategoryId(Long categoryId, Pageable pageable) {
+        categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new CategoryNotFoundException(categoryId));
 
-        Page<Product> productPage = productRepository.getProductsByCategory_CategoryName(categoryName, pageable);
+        Page<Product> productPage = productRepository.getProductsByCategory_Id(categoryId, pageable);
         return productPage.map(productDtoMapper::toSimpleDto);
     }
 
@@ -100,10 +100,11 @@ public class ProductService {
         return Product
                 .builder()
                 .name(command.getProductName())
-                .price(command.getPrice())
+                .price(command.getUnitPrice())
                 .description(command.getDescription())
-                .unitsInStock(command.getAmountOfProducts())
+                .unitsInStock(command.getUnitsInStock())
                 .imageUrl(command.getImageUrl())
+                .sku(command.getSku())
                 .build();
     }
 }

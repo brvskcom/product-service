@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -26,12 +25,9 @@ public class CategoryService {
         categoryRepository.save(newCategory);
     }
     
-    public List<String> getAllCategories(){
+    public List<Category> getAllCategories(){
         return categoryRepository
-                .findAll()
-                .stream()
-                .map(Category::getCategoryName)
-                .collect(Collectors.toList());
+                .findAll();
     }
     
     public void deleteCategory(Long categoryId){

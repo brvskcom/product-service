@@ -37,10 +37,10 @@ public class ProductController {
         return productService.getAllProducts(pageable);
     }
 
-    @GetMapping(params = "category_name")
-    public Page<ProductSimpleDto> getProductsByCategoryName(@RequestParam(name = "category_name") String categoryName,
+    @GetMapping(value = "/search/findByCategoryId", params = "id")
+    public Page<ProductSimpleDto> getProductsByCategoryId(@RequestParam(name = "id") Long categoryId,
                                                             @PageableDefault(size = 20) Pageable pageable) {
-        return productService.getProductsByCategoryName(categoryName, pageable);
+        return productService.getProductsByCategoryId(categoryId, pageable);
     }
 
     @GetMapping(path = "/{product_id}")

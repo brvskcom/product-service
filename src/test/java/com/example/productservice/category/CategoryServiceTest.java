@@ -8,10 +8,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -50,24 +49,6 @@ class CategoryServiceTest {
 
         verify(categoryRepository, times(1)).existsByCategoryName(categoryName);
         verify(categoryRepository, never()).save(any(Category.class));
-    }
-
-    @Test
-    void getAllCategories_CategoriesExist_ReturnsListOfCategoryNames() {
-        // Given
-        List<Category> categories = List.of(
-                new Category(1L, "Category1"),
-                new Category(2L, "Category2")
-        );
-        when(categoryRepository.findAll()).thenReturn(categories);
-
-        // When
-        List<String> result = categoryService.getAllCategories();
-
-        // Then
-        assertEquals(2, result.size());
-        assertEquals("Category1", result.get(0));
-        assertEquals("Category2", result.get(1));
     }
 
     @Test

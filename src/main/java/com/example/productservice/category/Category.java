@@ -1,10 +1,9 @@
 package com.example.productservice.category;
 
 import com.example.productservice.product.Product;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +12,8 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
 
 @Table(name = "category")
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Category {
@@ -40,6 +40,7 @@ public class Category {
     )
     private String categoryName;
 
+    @JsonIgnore
     @OneToMany(
             mappedBy = "category",
             orphanRemoval = true,

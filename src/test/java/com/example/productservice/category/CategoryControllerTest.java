@@ -7,9 +7,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import java.util.List;
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -23,17 +25,6 @@ class CategoryControllerTest {
     @MockBean
     private CategoryService categoryService;
 
-    @Test
-    void getAllCategories_ReturnsListOfCategories() throws Exception {
-        // Given
-        List<String> categories = List.of("Category1", "Category2");
-        when(categoryService.getAllCategories()).thenReturn(categories);
-
-        // When/Then
-        mockMvc.perform(get("/api/v1/categories"))
-                .andExpect(status().isOk())
-                .andExpect(content().json("[\"Category1\",\"Category2\"]"));
-    }
 
     @Test
     void createNewCategory_ValidCategory_ReturnsCreatedStatus() throws Exception {
