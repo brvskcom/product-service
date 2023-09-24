@@ -13,8 +13,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class ProductService {
@@ -74,9 +72,9 @@ public class ProductService {
         Product productToUpdate = productRepository.findById(productId)
                 .orElseThrow(() -> new ProductNotFoundException(productId));
 
-        int currentAmount = productToUpdate.getAmountOfProducts();
+        int currentAmount = productToUpdate.getUnitsInStock();
         int newAmount = currentAmount + increaseByAmount;
-        productToUpdate.setAmountOfProducts(newAmount);
+        productToUpdate.setUnitsInStock(newAmount);
 
         productRepository.save(productToUpdate);
     }
@@ -86,14 +84,14 @@ public class ProductService {
         Product productToUpdate = productRepository.findById(productId)
                 .orElseThrow(() -> new ProductNotFoundException(productId));
 
-        int currentAmount = productToUpdate.getAmountOfProducts();
+        int currentAmount = productToUpdate.getUnitsInStock();
         int newAmount = currentAmount - decreaseByAmount;
 
         if (newAmount < 0) {
             throw new IllegalArgumentException("The amount of products cannot be negative.");
         }
 
-        productToUpdate.setAmountOfProducts(newAmount);
+        productToUpdate.setUnitsInStock(newAmount);
         productRepository.save(productToUpdate);
     }
 
@@ -104,7 +102,8 @@ public class ProductService {
                 .name(command.getProductName())
                 .price(command.getPrice())
                 .description(command.getDescription())
-                .amountOfProducts(command.getAmountOfProducts())
+                .unitsInStock(command.getAmountOfProducts())
+                .imageUrl(command.getImageUrl())
                 .build();
     }
 }

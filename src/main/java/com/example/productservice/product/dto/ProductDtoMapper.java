@@ -3,8 +3,6 @@ package com.example.productservice.product.dto;
 import com.example.productservice.product.Product;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 public class ProductDtoMapper {
 
@@ -13,7 +11,7 @@ public class ProductDtoMapper {
                 .builder()
                 .productName(product.getName())
                 .price(product.getPrice())
-                .amountOfProducts(product.getAmountOfProducts())
+                .amountOfProducts(product.getUnitsInStock())
                 .id(product.getId())
                 .build();
     }
@@ -24,7 +22,7 @@ public class ProductDtoMapper {
                 .productName(product.getName())
                 .description(product.getDescription())
                 .categoryName(product.getCategory().getCategoryName())
-                .amountOfProducts(product.getAmountOfProducts())
+                .amountOfProducts(product.getUnitsInStock())
                 .price(product.getPrice())
                 .id(product.getId())
                 .build();

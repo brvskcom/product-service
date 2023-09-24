@@ -21,6 +21,7 @@ public class ProductCreateCommand {
     private String categoryName;
     @NotBlank(message = "Description cannot be blank")
     private String description;
+    private String imageUrl;
     @Min(value = 0, message = "Amount of products must be greater than or equal to 0")
     private int amountOfProducts;
 }

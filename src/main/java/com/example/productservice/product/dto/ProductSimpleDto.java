@@ -1,12 +1,11 @@
 package com.example.productservice.product.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import java.math.BigDecimal;
 
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 public class ProductSimpleDto {

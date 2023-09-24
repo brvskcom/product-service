@@ -6,8 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
@@ -36,6 +39,12 @@ public class Product {
     private Long id;
 
     @Column(
+            name = "sku",
+            nullable = false
+    )
+    private String sku;
+
+    @Column(
             name = "name",
             nullable = false,
             length = 40
@@ -49,16 +58,36 @@ public class Product {
     private BigDecimal price;
 
     @Column(
+            name = "image_url",
+            nullable = true
+    )
+    private String imageUrl;
+
+    @Column(
             name = "description",
             nullable = false
     )
     private String description;
 
     @Column(
-            name = "amount_of_products",
+            name = "units_in_stock",
             nullable = false
     )
-    private int amountOfProducts;
+    private int unitsInStock;
+
+    @UpdateTimestamp
+    @Column(
+            name = "updated_at",
+            nullable = false
+    )
+    private LocalDateTime updatedAt;
+
+    @CreationTimestamp
+    @Column(
+            name = "created_at",
+            nullable = false
+    )
+    private LocalDateTime cratedAt;
 
     @ManyToOne
     @JoinColumn(

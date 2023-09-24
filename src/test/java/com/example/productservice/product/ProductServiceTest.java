@@ -211,7 +211,7 @@ class ProductServiceTest {
         // Then
         verify(productRepository, times(1)).findById(productId);
         verify(productRepository, times(1)).save(product);
-        assertEquals(55, product.getAmountOfProducts());
+        assertEquals(55, product.getUnitsInStock());
     }
 
     @Test
@@ -229,7 +229,7 @@ class ProductServiceTest {
         // Then
         verify(productRepository, times(1)).findById(productId);
         verify(productRepository, times(1)).save(product);
-        assertEquals(47, product.getAmountOfProducts());
+        assertEquals(47, product.getUnitsInStock());
     }
 
     @Test
@@ -239,7 +239,7 @@ class ProductServiceTest {
         int decreaseByAmount = 11;
         Product product = Product.builder()
                 .id(productId)
-                .amountOfProducts(10)
+                .unitsInStock(10)
                 .build();
 
         when(productRepository.findById(productId)).thenReturn(Optional.of(product));
@@ -297,7 +297,7 @@ class ProductServiceTest {
                 .name("Test Product")
                 .price(BigDecimal.valueOf(100.0))
                 .description("Test Description")
-                .amountOfProducts(50)
+                .unitsInStock(50)
                 .build();
     }
 
