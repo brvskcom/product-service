@@ -55,7 +55,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(responseMessage);
     }
 
-    @PatchMapping("/{product_id}/increase")
+    @PutMapping("/{product_id}/increase")
     public ResponseEntity<String> increaseAmountOfProducts(@PathVariable("product_id") Long productId,
                                                            @RequestParam("amount") int increaseByAmount) {
         productService.increaseAmountOfProducts(productId, increaseByAmount);
@@ -63,7 +63,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(responseMessage);
     }
 
-    @PatchMapping("/{product_id}/decrease")
+    @PutMapping("/{product_id}/decrease")
     public ResponseEntity<String> decreaseAmountOfProducts(@PathVariable("product_id") Long productId,
                                                            @RequestParam("amount") int decreaseByAmount) {
         productService.decreaseAmountOfProducts(productId, decreaseByAmount);
