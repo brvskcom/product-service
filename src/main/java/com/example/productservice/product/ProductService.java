@@ -87,10 +87,6 @@ public class ProductService {
         int currentAmount = productToUpdate.getUnitsInStock();
         int newAmount = currentAmount - decreaseByAmount;
 
-        if (newAmount < 0) {
-            throw new IllegalArgumentException("The amount of products cannot be negative.");
-        }
-
         productToUpdate.setUnitsInStock(newAmount);
         productRepository.save(productToUpdate);
     }
